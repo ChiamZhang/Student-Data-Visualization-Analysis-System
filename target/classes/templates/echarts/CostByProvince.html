@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProvinceAtlas</title>
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/china.js"></script>
+    <link rel="stylesheet" href="/css/st.css">
+</head>
+<body>
+<div id="Echarts"></div>
+<script>
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('Echarts'));
+    // 指定图表的配置项和数据
+    option = {
+        title: {
+            text: '消费统计（省份）',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['消费统计']
+        },
+        visualMap: {
+            type: 'piecewise',
+            pieces: [
+                { min: 3000000, max: 1000000000, label: '大于等于300万元', color: '#372a28' },
+                { min:2000000,max: 2999999, label: '200万-300万元', color: '#4e160f' },
+                { min: 1000000, max: 1999999,label: '100万-200万元', color: '#974236' },
+                { min: 500000, max: 999999, label: '50万-100万元', color: '#ee7263' },
+                { min: 1, max: 499999, label: '1-50万元', color: '#f5bba7' },
+            ],
+            color: ['#E0022B', '#E09107', '#A3E00B']
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                mark: { show: true },
+                dataView: { show: true, readOnly: false },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        roamController: {
+            show: true,
+            left: 'right',
+            mapTypeControl: {
+                'china': true
+            }
+        },
+        series: [
+            {
+                name: '消费',
+                type: 'map',
+                mapType: 'china',
+                roam: false,
+                label: {
+                    show: true,
+                    color: 'rgb(249, 249, 249)'
+                },
+                data: []
+            }
+        ]
+    };
+
+    //使用指定的配置项和数据显示图表
+    myChart.setOption(option);
+
+    //获取数据
+    function getData() {
+        $.ajax({
+            url: "/findProvinceCost",
+            dataType: "json",
+            success: function (data) {
+                //  console.log(data.data)
+
+                var newArr = [];
+                //newArr的数据格式为：
+                // [{
+                //   name: '北京11',
+                //   value: 212
+                // }, {
+                //   name: '天津',
+                //   value: 60
+                // }]
+
+                //获取到各个省份的数据
+                //  var province = res.areaTree[0].children;
+                for (var i = 0; i < data.length; i++) {
+
+                    var json = {
+                        name: data[i].province,
+                        value: data[i].cost
+                    }
+                    newArr.push(json)}
+
+                console.log(newArr)
+                console.log(JSON.stringify(newArr))
+                //使用指定的配置项和数据显示图表
+                myChart.setOption({
+                    series: [
+                        {
+                            name: '消费',
+                            type: 'map',
+                            mapType: 'china',
+                            roam: false,
+                            label: {
+                                show: true,
+                                color: 'rgb(249, 249, 249)'
+                            },
+                            data: newArr
+                        }
+                    ]
+                });
+
+            }
+
+        })
+    }
+    getData();
+</script>
+
+
+</body>
+</html>

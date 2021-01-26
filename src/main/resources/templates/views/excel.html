@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      th:replace="layout/layout(title='测试数据',cssPaths='/public/css/plugins/datapicker/datepicker3.css',jsPaths='/public/js/plugins/dataTables/datatables.min.js,/modular/receiveOrder/wmsReceiveOrder.js')">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="modal inmodal" id="apImportModel" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" id="apImportDiv" th:fragment="apImportDiv">
+        <div class="modal-content animated fadeIn">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <form  class="dropzone"  id="dropzoneForm" enctype="multipart/form-data">
+                <div class="fallback">
+                    <input name="file" type="file" id="file_id" />
+                </div>
+            </form>
+            <button id="uploladBtn" class="btn btn-info mt-2" type="button" onclick="return uploadExcel()"><i class="fa fa-reply"></i>上传</button>
+            <button id="parseBtn" class="btn btn-info mt-2" type="button" onclick="return parseExcel()"><i class="fa fa-reply"></i>导入</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

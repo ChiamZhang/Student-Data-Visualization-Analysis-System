@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>男女比例</title>
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/china.js"></script>
+    <link rel="stylesheet" href="/css/st.css">
+</head>
+<body>
+<div id="Echarts"></div>
+<script>
+
+    var myChart = echarts.init(document.getElementById('Echarts'));
+    var posList = [
+        'left', 'right', 'top', 'bottom',
+        'inside',
+        'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+        'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+    ];
+
+
+
+
+
+    option = {
+        color: ['#3691ec', '#ec0b86'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            },
+            formatter:"{b}"+"<br\>"+"{a0}:{c0}%"+"<br\>"+"{a1}:{c1}%"
+        },
+        legend: {
+            data: ['男', '女']
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        dataZoom: [{
+            type: 'inside'
+        }],
+        xAxis: [
+
+            {
+                type: 'category',
+                axisTick: {show: false},
+                data: []
+            }
+        ],
+        yAxis: [
+            {
+
+                type: 'value',
+                axisLabel: {
+                    show: true,
+                    interval: 'auto',
+                    formatter: '{value}%'
+                }
+            }
+        ],
+        series: [
+
+            {
+                name: '男',
+                type: 'bar',
+                barGap: 0,
+                show: true,
+                data: []
+            },
+            {
+                name: '女',
+                type: 'bar',
+                show: true,
+                data: []
+            }
+        ]
+    };
+    myChart.setOption(option);
+    function getData() {
+        $.ajax({
+            url: "/countSexByCollege",
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+
+                var x = [];
+                var nan_value=[];
+                var nv_value=[];
+                //newArr的数据格式为：
+                // [{
+                //   name: '北京11',
+                //   value: 212
+                // }, {
+                //   name: '天津',
+                //   value: 60
+                // }]
+
+                //获取到各个省份的数据
+                //  var province = res.areaTree[0].children;
+                var i=0;
+                for (i = 0; i < data.length; i+=2) {
+                    // var json = {
+                    //     name: data[i].province,
+                    //     value: data[i].quality
+                    // }
+                    if(i+1<data.length&&data[i].city==data[i+1].city) {
+                        var total=data[i].quality+data[i+1].quality
+                        x.push(data[i].college);
+                        nv_value.push((100.0*data[i].quality/total).toFixed(1));
+                        nan_value.push((100.0*data[i+1].quality/total).toFixed(1))
+
+                    }
+                    else{
+                        if(data[i].sex=='男'){
+                            nan_value.push(100);
+                            nv_value.push(0)
+                        }
+                        else{
+                            nan_value.push(0);
+                            nv_value.push(100)
+                        }
+                        i--;
+                    }
+                }
+
+                // console.log(newArr)
+                // console.log(JSON.stringify(newArr))
+                //使用指定的配置项和数据显示图表
+                myChart.setOption({
+                    xAxis: [
+                        {
+                            type: 'category',
+                            axisTick: {show: false},
+                            data:x
+                        }
+                    ],
+                    yAxis: [
+                        {
+
+                            type: 'value',
+                            axisLabel: {
+                                show: true,
+                                interval: 'auto',
+                                formatter: '{value}%'
+                            }
+                        }
+                    ],
+                    series: [
+
+
+                        {
+                            name: '男',
+                            type: 'bar',
+                            barGap: 0,
+                            label: {
+                                show: true,
+                                position: 'insideTop',
+                                formatter:"{c}%",
+                                fontSize:8
+                            },
+                            data: nan_value
+                        },
+                        {
+                            name: '女',
+                            type: 'bar',
+                            label: {
+                                show: true,
+                                position: 'insideTop',
+                                formatter:"{c}%",
+                                fontSize:8
+                            },
+                            data: nv_value
+                        }
+
+                    ]
+                });
+
+            }
+
+        })
+    }
+    getData();
+</script>
+</body>
+</html>

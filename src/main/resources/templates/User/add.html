@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>添加用户界面</title>
+</head>
+<body>
+<h3>输入信息</h3>
+<div th:text="${mes}" style="color: red"></div>
+<form action="/user/add" method="post">
+    <table>
+        <tr>
+            <td>学号：</td>
+            <td><input type="text" name="xuehao"></td>
+        </tr>
+        <tr>
+            <td>用户名：</td>
+            <td><input type="text" name="name"></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td>权力：</td>
+            <td><input type="text" name="power"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="登录"></td>
+            <td><input type="reset" value="清空"></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

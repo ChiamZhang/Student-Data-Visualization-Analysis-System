@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>消费男女比例</title>
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/china.js"></script>
+    <link rel="stylesheet" href="/css/st.css">
+</head>
+<body>
+<div id="Echarts"></div>
+<script>
+
+    var myChart = echarts.init(document.getElementById('Echarts'));
+    var posList = [
+        'left', 'right', 'top', 'bottom',
+        'inside',
+        'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+        'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+    ];
+
+
+
+
+
+    option = {
+        title: {
+            text: '男女消费比例',
+
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+
+            data: []
+        },
+        color:['#DC143C','blue',],
+        series: [
+            {
+                name: '性别',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                data: [
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    myChart.setOption(option);
+    function getData() {
+        $.ajax({
+            url: "/findSexCost",
+            dataType: "json",
+            success: function (data) {
+
+                console.log(data)
+                var arr=[]
+                var legen=[]
+                for(var i=0;i<data.length;i++){
+                    legen.push(data[i].sex)
+                    arr.push({
+                        value:data[i].cost,
+                        name:data[i].sex
+
+                    })
+                }
+
+
+
+                myChart.setOption({
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+
+                        data: legen
+                    },
+                    series: [
+                        {
+                            name: '性别',
+                            type: 'pie',
+                            radius: '55%',
+                            center: ['50%', '60%'],
+                            data: arr,
+                            label: {
+                                formatter: [
+                                    '{b}',
+                                    '{c}元',
+                                    '{d}%'
+
+                                ].join('\n'),
+                                fontSize:15,
+                            emphasis: {
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }}
+                    ]
+                });
+
+            }
+
+        })
+    }
+    getData();
+</script>
+</body>
+</html>

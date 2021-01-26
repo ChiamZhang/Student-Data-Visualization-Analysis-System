@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 370px;
+            height: 100vh;
+            background: radial-gradient(at center, #4682B4, #F8F8FF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div.search {
+            height: 40px;
+            width: 500px;
+        }
+
+        div.search {
+            height: 40px;
+            width: 500px;
+        }
+
+        div.search form {
+            width: 80%;
+            height: 80%;
+
+            background: white;
+        }
+
+        div.search form input:nth-child(2) {
+            width: 370px;
+            height: 100%;
+            font-size: 20px;
+            text-indent: 1px;
+            background: #F5F5F5;
+            float: left;
+        }
+
+        div.search form input:nth-child(3) {
+            width: 100px;
+            height: 100%;
+            font-size: 20px;
+            letter-spacing: 5px;
+           border: solid;
+            background: white;
+        }
+
+        div.search form img {
+            position: absolute;
+            left: 50vw;
+            transform: translateX(-250px);
+            margin-top: 10px;
+            margin-left: 10px;
+            height: 20px;
+        }
+    </style>
+    <script>
+        function result() {
+            var msg="[[${msg}]]";
+            if(msg=="导出成功"){
+                alert(msg);
+            }
+        }
+        result();
+    </script>
+    <title>数据库导出excel</title>
+</head>
+<body>
+<div class="search">
+
+    <form action="/ExcelExport">
+        <img src="./search_ico.png" alt="">
+        <input type="file"
+               name="file"  >
+        <select  name="leixing" lay-verify="required"style="height: 30px;" >
+            <option value="1">计划招生</option>
+            <option value="2">学生基础信息</option>
+            <option value="3">毕业去向</option>
+            <option value="4">学生消费</option>
+            <option value="5">学生绩点</option>
+        </select>
+        <input type="submit" value="导出文件"style="font-size: 20px; position: relative; left: 178px;top: 3px;" >
+
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/layui.mobile.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/css/st.css">
+</head>
+<body>
+
+<div id="ProvinceAtlasEcharts_2016" style="width:800px;height:500px;float: left"></div>
+<div style="z-index: 1" class="layui-form">
+    <table class="layui-table">
+        <colgroup>
+            <col width="150">
+            <col width="150">
+            <col width="150">
+            <col width="150">
+            <col width="150">
+            <col width="250">
+            <col width="150">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>学号</th>
+            <th>绩点</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>学院</th>
+            <th>专业</th>
+            <th>联系方式</th>
+            <th>学霸指数</th>
+
+        </tr>
+        </thead>
+        <tbody id="tb">
+        </tbody>
+    </table>
+</div>
+<script>
+    var myChart = echarts.init(document.getElementById('ProvinceAtlasEcharts_2016'));
+   /*
+   *     get（0） get（2）  get（1）
+   * */
+   /*
+   *    最低 最高 平均值
+   * */
+    var data ;
+    var student;
+    $.ajax({
+        url:"ExcellentStudentList",
+        type:"GET",
+        dataType:"JSON",
+        cache : false,
+        async : false,
+        success:function(result){
+            // return data;
+            data = result;
+            console.log(result);
+            return;
+        }
+    });
+    /*
+    * 将student的基础信息到到js
+    * */
+    var arrdata=[];
+    $.ajax({
+        url:"ExcellentStudentList",
+        type:"GET",
+
+        cache : false,
+        async : false,
+        success:function(result){
+            // return data;
+            student = result;
+            $.each(result,function (i,v) {
+                var str="<tr id="+v[1]+ ">\n" +
+                    "            <td>"+v[0]+"</td>\n" +
+                    "            <td>"+v[1]+"</td>\n" +
+                    "            <td>"+v[2]+"</td>\n" +
+                    "            <td>"+v[3]+"</td>\n" +
+                    "            <td>"+v[4]+"</td>\n" +
+                    "            <td>"+v[5]+"</td>\n" +
+                    "            <td>"+v[6]+"</td>\n" +
+                    "            <td>"+v[7]+"</td>\n" +
+                    "        </tr>"
+                arrdata.push(str);
+                $("#tb"). append(arrdata[i]);
+            })
+
+        },error(){
+        }
+    });
+
+    var cities = ['第一名', '第二名', '第三名', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
+    var barHeight = 0.05;
+
+    option = {
+        title: {
+            text: '学霸排名',
+            subtext: ''
+        },
+        legend: {
+            show: true,
+            data: ['学霸指数']
+        },
+        grid: {
+            top: 100
+        },
+        angleAxis: {
+            type: 'category',
+            data: cities
+        },
+        tooltip: {
+            show: true,
+            formatter: function (params) {
+                var id = params.dataIndex;
+                return cities[id] + '<br>学生绩点：' + data[id][1] + '<br>学霸指数：' + data[id][7] + '<br>学生姓名：' + data[id][2];
+    }
+        },
+        radiusAxis: {
+        },
+        polar: {
+        },
+        series: [{
+            type: 'bar',
+            itemStyle: {
+                color: 'transparent'
+            },
+            data: data.map(function (d) {
+                return 0;
+            }),
+            coordinateSystem: 'polar',
+            stack: '最大最小值',
+            silent: true
+        }, {
+            type: 'bar',
+            data: data.map(function (d) {
+                return d[7] -0;
+            }),
+            coordinateSystem: 'polar',
+            name: '学霸指数',
+            stack: '最大最小值'
+        }]
+    };
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>

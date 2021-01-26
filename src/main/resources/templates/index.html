@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/layui.css">
+    <link rel="stylesheet" href="/assets/css/admin.css">
+    <link rel="icon" href="/templates/favicon.ico">
+    <title>管理后台</title>
+    <script>
+        window.onload=function(){
+            var Id="[[${ID}]]";
+            console.log(Id);
+            document.getElementById("UserId").innerText =Id;
+
+        }
+
+    </script>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header custom-header">            
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item slide-sidebar" lay-unselect>
+                    <a href="javascript:;" class="icon-font"><i class="ai ai-menufold"></i></a>
+                </li>               
+            </ul>
+			<p class="datexians">学生图谱</p>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a id="UserId" href="javascript:;"></a>
+                    <dl class="layui-nav-child" id="zqr">
+                        <dd><a href="">帮助中心</a></dd>
+                        <dd><a href="/toLogin">退出</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+
+        <div class="layui-side custom-admin">
+            <div class="layui-side-scroll">
+                <div class="custom-logo">
+                    <img src="/assets/images/logo.png" alt=""/>
+                    <h1>管理系统</h1>
+                </div>
+                <ul id="Nav" class="layui-nav layui-nav-tree">
+                    <li class="layui-nav-item" >
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe665;</i>
+                            <em>生源图谱</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/ProvinceAtlas">各省份生源图谱</a></dd>
+                            <dd><a href="/CityAtlas">各地市生源图谱</a></dd>
+                            <dd><a href="/GoodStudentsByCity">优秀学子城市分布</a></dd>
+                            <dd><a href="/GoodStudentsByProvince">优秀学子省份分布</a></dd>
+                            <dd><a href="/PovertyByProvince">贫困学子省份分布</a></dd>
+                            <dd><a href="/PovertyByCity">贫困学子城市分布</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe857;</i>
+                            <em>学生性别统计</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/SexProvince">各省份男女比例</a></dd>
+                            <dd><a href="/SexCity">各地市男女比例</a></dd>
+                            <dd><a href="/SexCollege">各学院男女比例</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe663;</i>
+                            <em>学生统计</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/CountStudentByCollegeandGrade">学生数量</a></dd>
+<!--                        <dd><a href="/views/10人才流转.html">人才流转</a></dd>-->
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe653;</i>
+                            <em>餐厅学生消费趋势</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/AvgCostByGrade">各年级一卡通消费趋势</a></dd>
+
+                            <dd><a href="/CostBySex">一卡通消费性别总计</a></dd>
+
+                            <dd><a href="/CostByProvince"> 一卡通消费省份总计</a></dd>
+                            <dd><a href="/CostByCity">一卡通消费城市总计</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe631;</i>
+                            <em>构建学生就业信息统计
+                            </em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/JobByCity">就业地市图谱</a></dd>
+                            <dd><a href="/JobByCityandCollege">各学院就业地市图谱</a></dd>
+                            <dd><a href="/JobByCityandMajor">各专业就业地市图谱</a></dd>
+                            <dd><a href="/NatureByCollege">各学院岗位性质统计</a></dd>
+                            <dd><a href="/NatureByGrade">各年级岗位性质统计</a></dd>
+                            <dd><a href="/NatureByMajor">各专业岗位性质统计</a></dd>
+<!--                            <dd><a href="/views/15帮助中心-合作共赢.html">合作共赢</a></dd>-->
+<!--                            <dd><a href="/views/15帮助中心-网站导航.html">网站导航</a></dd>-->
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe663;</i>
+                            <em>学霸指数</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/myfirst">学霸指数</a></dd>
+
+                            <!--                        <dd><a href="/views/10人才流转.html">人才流转</a></dd>-->
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe663;</i>
+                            <em>招生信息</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/mysecond">各省份计划招生图谱</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon">&#xe663;</i>
+                            <em>数据导入导出模块</em>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="/export">导入</a></dd>
+                            <dd><a href="/import">导出</a></dd>
+                        </dl>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="layui-body">
+             <div class="layui-tab app-container" lay-allowClose="true" lay-filter="tabs">
+                <ul id="appTabs" class="layui-tab-title custom-tab" style="display: none;"></ul>
+                <div id="appTabPage" class="layui-tab-content"></div>
+            </div>
+        </div>
+        <div class="layui-footer">
+
+        </div>
+        <div class="mobile-mask"></div>
+    </div>
+    <script src="/assets/layui.js"></script>
+    <script src="/index.js" data-main="home"></script>
+</body>
+</html>

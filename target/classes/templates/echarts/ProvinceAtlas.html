@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/st.css">
+    <meta charset="UTF-8">
+    <title>ProvinceAtlas</title>
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/china.js"></script>
+    <link rel="stylesheet" href="/css/st.css">
+</head>
+<body style="align-content: center">
+<div id="Echarts"></div>
+<script>
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('Echarts'));
+    // 指定图表的配置项和数据
+    option = {
+        title: {
+            text: '生源图谱省份分布',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            right: 20,
+            top: 10,
+            data: [{
+                name: '2016',
+            }, {
+                name: '2017',
+            },
+                {
+                    name: '2018',
+                },
+                {
+                    name: '2019',
+                }
+            ],
+            selected:{
+
+              '2017':false,
+              '2018':false,
+              '2019':false
+            },
+            show:true,
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        visualMap: {
+            type: 'piecewise',
+            pieces: [
+                { min: 1000, max: 1000000, label: '大于等于1000人', color: '#372a28' },
+                { min: 500, max: 999, label: '500-999人', color: '#4e160f' },
+                { min: 100, max: 499, label: '100-499人', color: '#974236' },
+                { min: 10, max: 99, label: '10-99人', color: '#ee7263' },
+                { min: 1, max: 9, label: '1-9人', color: '#f5bba7' },
+            ],
+            color: ['#E0022B', '#E09107', '#A3E00B']
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                mark: { show: true },
+                dataView: { show: true, readOnly: false },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        roamController: {
+            show: true,
+            left: 'right',
+            mapTypeControl: {
+                'china': true
+            }
+        },
+
+        series: [
+        ]
+    };
+
+    //使用指定的配置项和数据显示图表
+    myChart.setOption(option);
+
+    //获取数据
+    function getData() {
+        $.ajax({
+            url: "/countByProvinceAndStu_grade",
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                function GroupBy(arr, key) {
+                    var obj = {};
+                    for (let i = 0; i < arr.length; i++) {
+                        if (obj[arr[i][key]]) {
+                            obj[arr[i][key]].push(arr[i]);
+                        } else {
+                            obj[arr[i][key]] = new Array();
+                            obj[arr[i][key]].push(arr[i]);
+                        }
+                    }
+                    return obj;
+                }
+
+                data = GroupBy(data,"stu_grade")
+                console.log(data)
+                var serie = []
+                var legen=[]
+                var data_value=[]
+                for(var key in data){
+                    legen.push(key.toString())
+                    data_value.push(data[key])
+                }
+                for (var i = 0; i < data_value.length; i++) {
+
+                    var newArr = []
+                    for (var j = 0; j < data_value[i].length; j++) {
+                        var json = {
+                            name: data_value[i][j].province,
+                            value: data_value[i][j].quality
+                        }
+                        newArr.push(json)
+                    }
+                    serie.push(    {
+                        name: legen[i],
+                        type: 'map',
+                        mapType: 'china',
+                        roam: true,
+                        zoom:1.2,
+                        label: {
+                            show: true,
+                            color: 'rgb(249, 249, 249)'
+                        },
+                        data: newArr
+                    })
+                }
+                console.log(legen)
+                console.log(serie)
+                //使用指定的配置项和数据显示图表
+                myChart.setOption({
+
+                    series: serie
+                });
+
+            }
+
+        })
+    }
+    getData();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProvinceAtlas</title>
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/china.js"></script>
+    <link rel="stylesheet" href="/css/st.css">
+</head>
+<body>
+<div id="Echarts"></div>
+<script>
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('Echarts'));
+    // 指定图表的配置项和数据
+    option = {
+        title: {
+            text: '优秀学子图谱',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['2016级省份生源图']
+        },
+        visualMap: {
+            type: 'piecewise',
+            pieces: [
+                { min: 1000, max: 1000000, label: '大于等于1000人', color: '#372a28' },
+                { min: 500, max: 999, label: '500-999人', color: '#4e160f' },
+                { min: 100, max: 499, label: '100-499人', color: '#974236' },
+                { min: 10, max: 99, label: '10-99人', color: '#ee7263' },
+                { min: 1, max: 9, label: '1-9人', color: '#f5bba7' },
+            ],
+            color: ['#E0022B', '#E09107', '#A3E00B']
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                mark: { show: true },
+                dataView: { show: true, readOnly: false },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        roamController: {
+            show: true,
+            left: 'right',
+            mapTypeControl: {
+                'china': true
+            }
+        },
+        series: [
+            {
+                name: '人数',
+                type: 'map',
+                mapType: 'china',
+                roam: false,
+                label: {
+                    show: true,
+                    color: 'rgb(249, 249, 249)'
+                },
+                data: []
+            }
+        ]
+    };
+
+    //使用指定的配置项和数据显示图表
+    myChart.setOption(option);
+
+    //获取数据
+    function getData() {
+        $.ajax({
+            url: "/countByProvinceAndStu_grade",
+            dataType: "json",
+            success: function (data) {
+                //  console.log(data.data)
+                function GroupBy(arr, key) {
+                    var obj = {};
+                    for (let i = 0; i < arr.length; i++) {
+                        if (obj[arr[i][key]]) {
+                            obj[arr[i][key]].push(arr[i]);
+                        } else {
+                            obj[arr[i][key]] = new Array();
+                            obj[arr[i][key]].push(arr[i]);
+                        }
+                    }
+                    return obj;
+                }
+
+                data = GroupBy(data, stu_grade)
+
+
+                //newArr的数据格式为：
+                // [{
+                //   name: '北京11',
+                //   value: 212
+                // }, {
+                //   name: '天津',
+                //   value: 60
+                // }]
+
+                //获取到各个省份的数据
+                //  var province = res.areaTree[0].children;
+                var serie = []
+                for (var i = 0; i < data.length; i++) {
+                    var newarr = []
+                    for (var j = 0; j < data[i].length; j++) {
+                        var json = {
+                            name: data[j].province,
+                            value: data[j].quality
+                        }
+                        newArr.push(json)
+                    }
+                    serie.push(    {
+                        name: '人数',
+                        type: 'map',
+                        mapType: 'china',
+                        roam: false,
+                        label: {
+                            show: true,
+                            color: 'rgb(249, 249, 249)'
+                        },
+                        data: newArr
+                    })
+                }
+
+
+
+                //使用指定的配置项和数据显示图表
+                myChart.setOption({
+                    series: serie
+            });
+
+            }
+
+        })
+    }
+    getData();
+</script>
+
+
+</body>
+</html>

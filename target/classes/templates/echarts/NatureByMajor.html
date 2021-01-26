@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>岗位分专业统计</title>
+    <script src="/js/jquery-1.11.1.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/china.js"></script>
+    <link rel="stylesheet" href="/css/st.css">
+</head>
+<body>
+<div id="Echarts"></div>
+<script>
+
+    var myChart = echarts.init(document.getElementById('Echarts'));
+    var posList = [
+        'left', 'right', 'top', 'bottom',
+        'inside',
+        'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+        'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+    ];
+
+
+
+
+
+    option = {
+        color: ['#003366', '#006699', '#4cabce', '#e5323e','#ae5412'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        dataZoom: [ {
+            type: 'inside'
+        }],
+        legend: {
+            data: []
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {show: false},
+                data: []
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series:[]
+    };
+    myChart.setOption(option);
+    function getData() {
+        $.ajax({
+            url: "/findNatureByMajor",
+            dataType: "json",
+            success: function (data) {
+                function GroupBy(arr,key) {
+                    var obj = {};
+                    for (let i = 0; i <arr.length; i++) {
+                        if (obj[arr[i][key]]) {
+                            obj[arr[i][key]].push(arr[i]);
+                        } else {
+                            obj[arr[i][key]] = new Array();
+                            obj[arr[i][key]].push(arr[i]);
+                        }
+                    }
+                    return obj;
+                }
+                console.log(data)
+                data=GroupBy(data,"major")
+
+
+                var legen=[]
+                var data_key=[]
+                var data_value=[]
+                var val=[]
+                for(var key in data){
+                    data_key.push(key)
+                    data_value.push(data[key])
+                }
+                var k=0,max=0;
+                for(var i=0;i<data_value.length;i++){
+                    if(data_value.length>max){
+                        max=data_value[i].length;
+                        k=i;
+                    }
+                }
+                for(var i=0;i<data_value[k].length;i++)
+                    legen.push(data_value[k][i].nature)
+                console.log(legen)
+                console.log(data_value)
+                var flag=0
+                for(var i=0;i<legen.length;i++)
+                    val[i]=new Array()
+                for(var j=0;j<data_value.length;j++){
+                    for(var s=0;s<legen.length;s++) {flag=0
+                        for(var l=0;l<data_value[j].length;l++){
+                            console.log(legen.length,j,l,s)
+
+                            if (data_value[j][l].nature==legen[s]) {
+                                val[s].push(data_value[j][l].Count)
+                                 flag=1
+                        }
+
+
+                    }
+                        if(flag==0)
+                            val[s].push(0)
+                    }
+                }
+                // console.log(data_key)
+                // console.log(data_value)
+                // console.log(legen)
+                // console.log(val)
+                yaxis_series=[]
+
+                for(var i=0;i<legen.length;i++){
+                    yaxis_series.push({
+
+                        name: legen[i],
+                        type: 'bar',
+                        barGap: 0,
+                        // label: {
+                        //     show: true,
+                        //     position: 'insideTop',
+                        //     formatter:"{c}"
+                        // },
+                        data: val[i]
+
+
+
+                    })
+                }
+                myChart.setOption({
+                    legend: {
+                        data: legen
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            axisTick: {show: false},
+                            data:data_key
+                        }
+                    ],
+                    yAxis: [
+                        {
+
+                            type: 'value',
+                            axisLabel: {
+                                show: true,
+                                interval: 'auto',
+                                formatter: '{value}'
+                            }
+                        }
+                    ],
+                    series: yaxis_series
+                });
+
+            }
+
+        })
+    }
+    getData();
+</script>
+</body>
+</html>
