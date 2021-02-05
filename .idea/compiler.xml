@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="fxb" />
         <module name="HellowWorld" />
         <module name="StudentsInfor" />
         <module name="HellowWorld3" />
@@ -15,6 +16,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="StudentsInfor" options="-parameters" />
+      <module name="fxb" options="-parameters" />
     </option>
   </component>
 </project>
