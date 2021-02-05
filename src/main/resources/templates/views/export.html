@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style type="text/css">
@@ -7,24 +8,25 @@
             margin: 0;
             padding: 0;
         }
-
         body {
-            width: 370px;
+            width: 400px;
             height: 100vh;
             background: radial-gradient(at center, #4682B4, #F8F8FF);
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         div.search {
             height: 40px;
-            width: 500px;
-        }
+            width: 400px;
 
-        div.search {
-            height: 40px;
-            width: 500px;
+            position: absolute;
+            top: 200px;
+            left: 0;
+            right: 0;
+            margin: auto;
+
+            opacity: 0.8;
         }
 
         div.search form {
@@ -35,7 +37,7 @@
         }
 
         div.search form input:nth-child(2) {
-            width: 370px;
+            width: 400px;
             height: 100%;
             font-size: 20px;
             text-indent: 1px;
@@ -48,7 +50,7 @@
             height: 100%;
             font-size: 20px;
             letter-spacing: 5px;
-           border: solid;
+            border: solid;
             background: white;
         }
 
@@ -60,11 +62,37 @@
             margin-left: 10px;
             height: 20px;
         }
+
+        .search select {
+            height: 30px;
+            position: relative;
+            top: 10px;
+        }
+
+        .search input[type="submit"] {
+            /* background: #90b3d4; */
+            font-size: 20px;
+
+            position: relative;
+            left: 178px;
+            top: 12px;
+
+            border-radius: 5px;
+            border: 1px solid white;
+
+            outline: none;
+            cursor: pointer;
+        }
+
+        .search input[type="submit"]:hover {
+            background: hsla(200, 100%, 78%, 0.603);
+            color: #fff;
+        }
     </style>
     <script>
         function result() {
-            var msg="[[${msg}]]";
-            if(msg=="导出成功"){
+            var msg = "[[${msg}]]";
+            if (msg == "导出成功") {
                 alert(msg);
             }
         }
@@ -72,23 +100,24 @@
     </script>
     <title>数据库导出excel</title>
 </head>
+
 <body>
 <div class="search">
 
     <form action="/ExcelExport">
         <img src="./search_ico.png" alt="">
-        <input type="file"
-               name="file"  >
-        <select  name="leixing" lay-verify="required"style="height: 30px;" >
+        <input type="file" name="file">
+        <select name="leixing" lay-verify="required">
             <option value="1">计划招生</option>
             <option value="2">学生基础信息</option>
             <option value="3">毕业去向</option>
             <option value="4">学生消费</option>
             <option value="5">学生绩点</option>
         </select>
-        <input type="submit" value="导出文件"style="font-size: 20px; position: relative; left: 178px;top: 3px;" >
+        <input type="submit" value="导出文件">
 
     </form>
 </div>
 </body>
+
 </html>
