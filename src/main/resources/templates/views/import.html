@@ -9,7 +9,7 @@
         }
 
         body {
-            width: 370px;
+            width: 400px;
             height: 100vh;
             background: radial-gradient(at center, #4682B4, #F8F8FF);
             display: flex;
@@ -19,12 +19,15 @@
 
         div.search {
             height: 40px;
-            width: 370px;
-        }
+            width: 400px;
 
-        div.search {
-            height: 40px;
-            width:370px;
+            position: absolute;
+            top: 200px;
+            left: 0;
+            right: 0;
+            margin: auto;
+
+            opacity: 0.8;
         }
 
         div.search form {
@@ -35,7 +38,7 @@
         }
 
         div.search form input:nth-child(2) {
-            width: 370px;
+            width: 400px;
             height: 100%;
             font-size: 20px;
             /* text-indent: 1px; */
@@ -48,7 +51,7 @@
             height: 100%;
             font-size: 20px;
             letter-spacing: 5px;
-           /* border: solid; */
+            /* border: solid; */
             background: white;
         }
 
@@ -60,35 +63,60 @@
             margin-left: 10px;
             height: 20px;
         }
+
+        .search select {
+            height: 30px;
+            position: relative;
+            top: 10px;
+        }
+
+        .search input[type="submit"] {
+            /* background: #90b3d4; */
+            font-size: 20px;
+
+            position: relative;
+            left: 178px;
+            top: 12px;
+
+            border-radius: 5px;
+            border: 1px solid white;
+
+            outline: none;
+            cursor: pointer;
+        }
+
+        .search input[type="submit"]:hover {
+            background: hsla(200, 100%, 78%, 0.603);
+            color: #fff;
+        }
     </style>
     <title>数据库导出excel</title>
     <script>
         function result() {
-            var msg="[[${msg}]]";
-            if(msg!=null){
+            var msg = "[[${msg}]]";
+            if (msg != null) {
                 alert(msg);
             }
         }
         result();
     </script>
 </head>
+
 <body>
 <div class="search">
-
     <form action="/ExcelImport">
         <img src="./search_ico.png" alt="">
-        <input type="file"
-               name="file"  >
-        <select  name="leixing" lay-verify="required" style="height: 30px;">
+        <input type="file" name="file">
+        <select name="leixing" lay-verify="required">
             <option value="1">计划招生</option>
             <option value="2">学生基础信息</option>
             <option value="3">毕业去向</option>
             <option value="4">学生消费</option>
             <option value="5">学生绩点</option>
         </select>
-        <input type="submit" value="导入文件" style="font-size: 20px; position: relative; left: 178px;top: 3px;" >
-
+        <input type="submit" value="导入文件">
     </form>
 </div>
 </body>
+
 </html>
