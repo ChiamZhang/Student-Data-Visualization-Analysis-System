@@ -55,12 +55,24 @@
             {
                 type: 'category',
                 axisTick: {show: false},
-                data: []
+                data: [],
+                axisLabel:{
+                    color:'fff',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                }
             }
         ],
         yAxis: [
             {
-                type: 'value'
+                type: 'value',
+                axisLabel:{
+                    color:'fff',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                }
             }
         ],
         series:[]
@@ -149,23 +161,40 @@
                 }
                 myChart.setOption({
                     legend: {
-                        data: legen
+                        data: legen,
+                        textStyle: {
+                            color: '#fff'
+                        }
                     },
                     xAxis: [
                         {
                             type: 'category',
                             axisTick: {show: false},
-                            data:data_key
-                        }
+                            axisLine:{
+                                lineStyle:{
+                                    color:'#fff'}},
+                            data:data_key,
+                            axisLabel:{
+                                color:'fff',
+                                textStyle: {
+                                    color: '#fff'
+                                }
+                        }}
                     ],
                     yAxis: [
                         {
 
                             type: 'value',
+                            axisLine:{
+                                lineStyle:{
+                                    color:'#fff'}},
                             axisLabel: {
                                 show: true,
                                 interval: 'auto',
-                                formatter: '{value}'
+                                formatter: '{value}',
+                                textStyle: {
+                                    color: '#fff'
+                                }
                             }
                         }
                     ],

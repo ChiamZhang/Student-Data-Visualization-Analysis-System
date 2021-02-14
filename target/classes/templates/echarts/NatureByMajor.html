@@ -30,13 +30,19 @@
             trigger: 'axis',
             axisPointer: {
                 type: 'shadow'
-            }
+            },
+            textStyle: {
+                color: '#fff'
+            },
         },
         dataZoom: [ {
             type: 'inside'
         }],
         legend: {
-            data: []
+            data: [],
+            textStyle: {
+                color: '#fff'
+            }
         },
         toolbox: {
             show: true,
@@ -150,23 +156,42 @@
                 }
                 myChart.setOption({
                     legend: {
-                        data: legen
+                        data: legen,
+                        textStyle: {
+                            color: '#fff'
+                        }
                     },
                     xAxis: [
                         {
                             type: 'category',
                             axisTick: {show: false},
-                            data:data_key
+                            data:data_key,
+                            axisLine:{
+                                lineStyle:{
+                                    color:'#fff'}},
+                            axisLabel: {
+                                color: '#fff',
+                                textStyle: {
+                                    color: '#fff'
+                                }
+                            }
                         }
                     ],
                     yAxis: [
                         {
 
                             type: 'value',
+                            axisLine:{
+                                lineStyle:{
+                                    color:'#fff'}},
                             axisLabel: {
                                 show: true,
                                 interval: 'auto',
-                                formatter: '{value}'
+                                formatter: '{value}',
+                                corlor:'#fff',
+                                textStyle: {
+                                    color: '#fff'
+                                }
                             }
                         }
                     ],

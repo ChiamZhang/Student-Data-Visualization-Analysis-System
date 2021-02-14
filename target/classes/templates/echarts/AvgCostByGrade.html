@@ -33,7 +33,10 @@
             }
         },
         legend: {
-            data: ['2016','2017','2018','2019']
+            data: ['2016','2017','2018','2019'],
+            textStyle: {
+                color: '#fff'
+            }
         },
         toolbox: {
             show: true,
@@ -135,17 +138,31 @@
                         {
                             type: 'category',
                             axisTick: {show: false},
-                            data:data_key
-                        }
+                            data:data_key,
+                            axisLine:{
+                                lineStyle:{
+                                    color:'#fff'}},
+                            axisLabel:{
+                                color:'fff',
+                                textStyle: {
+                                    color: '#fff'
+                                }
+                        }}
                     ],
                     yAxis: [
                         {
 
                             type: 'value',
+                            axisLine:{
+                                lineStyle:{
+                                    color:'#fff'}},
                             axisLabel: {
                                 show: true,
                                 interval: 'auto',
-                                formatter: '{value}'
+                                formatter: '{value}',
+                                textStyle: {
+                                    color: '#fff'
+                                }
                             }
                         }
                     ],

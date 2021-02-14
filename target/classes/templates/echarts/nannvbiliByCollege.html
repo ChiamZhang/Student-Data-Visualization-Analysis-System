@@ -34,7 +34,10 @@
             formatter:"{b}"+"<br\>"+"{a0}:{c0}%"+"<br\>"+"{a1}:{c1}%"
         },
         legend: {
-            data: ['男', '女']
+            data: ['男', '女'],
+            textStyle: {
+                color: '#fff'
+            }
         },
         toolbox: {
             show: true,
@@ -57,17 +60,33 @@
             {
                 type: 'category',
                 axisTick: {show: false},
-                data: []
+                data: [],
+                axisLine:{
+                    lineStyle:{
+                        color:'#fff'}},
+                axisLabel:{
+                    color:'#fff',
+                    textStyle: {
+                        color: '#fff'
+                    }
+                }
             }
         ],
         yAxis: [
             {
 
                 type: 'value',
+                axisLine:{
+                    lineStyle:{
+                        color:'#fff'}},
                 axisLabel: {
                     show: true,
                     interval: 'auto',
-                    formatter: '{value}%'
+                    formatter: '{value}%',
+                    color:'#fff',
+                    textStyle: {
+                        color: '#fff'
+                    }
                 }
             }
         ],

@@ -30,6 +30,9 @@
             trigger: 'axis',
             axisPointer: {
                 type: 'shadow'
+            },
+            textStyle: {
+                color: '#fff'
             }
         },
         dataZoom: [ {
@@ -55,12 +58,18 @@
             {
                 type: 'category',
                 axisTick: {show: false},
-                data: []
+                data: [],
+                axisLine:{
+                    lineStyle:{
+                        color:'#fff'}},
             }
         ],
         yAxis: [
             {
-                type: 'value'
+                type: 'value',
+                axisLine:{
+                    lineStyle:{
+                        color:'#fff'}},
             }
         ],
         series:[]
@@ -150,13 +159,23 @@
                 }
                 myChart.setOption({
                     legend: {
-                        data: legen
+                        data: legen,
+                        textStyle: {
+                            color: '#fff'
+                        }
                     },
                     xAxis: [
                         {
                             type: 'category',
                             axisTick: {show: false},
-                            data:data_key
+                            data:data_key,
+
+                            axisLabel: {
+                                color: '#fff',
+                                textStyle: {
+                                    color: '#fff'
+                                },
+                            }
                         }
                     ],
                     yAxis: [
@@ -166,7 +185,11 @@
                             axisLabel: {
                                 show: true,
                                 interval: 'auto',
-                                formatter: '{value}'
+                                formatter: '{value}',
+                                color:'#fff',
+                                textStyle: {
+                                    color: '#fff'
+                                }
                             }
                         }
                     ],

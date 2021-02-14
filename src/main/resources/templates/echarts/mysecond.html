@@ -17,6 +17,9 @@
     option = {
         title: {
             text: '招生图谱',
+        textStyle: {
+            color: '#fff'
+        },
             left: 'center'
         },
         tooltip: {
@@ -25,7 +28,10 @@
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: ['招生图谱']
+            data: ['招生图谱'],
+            textStyle: {
+                color: '#fff'
+            },
         },
         visualMap: {
             type: 'piecewise',
@@ -36,7 +42,10 @@
                 { min: 10, max: 99, label: '10-99人', color: '#ee7263' },
                 { min: 1, max: 9, label: '1-9人', color: '#f5bba7' },
             ],
-            color: ['#E0022B', '#E09107', '#A3E00B']
+            color: ['#E0022B', '#E09107', '#A3E00B'],
+            textStyle: {
+                color: '#fff'
+            }
         },
         toolbox: {
             show: true,

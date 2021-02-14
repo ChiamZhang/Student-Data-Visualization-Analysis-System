@@ -103,18 +103,31 @@
     option = {
         title: {
             text: '学霸排名',
+
+            textStyle: {
+                    color: '#fff'
+                },
             subtext: ''
         },
         legend: {
             show: true,
-            data: ['学霸指数']
+            data: ['学霸指数'],
+            textStyle: {
+                color: '#fff'
+            },
         },
         grid: {
             top: 100
         },
         angleAxis: {
             type: 'category',
-            data: cities
+            data: cities,
+            axisLine:{
+                lineStyle:{
+                    color:'#fff'}},
+            axisLable:{textStyle: {
+                color: '#fff'
+            }}
         },
         tooltip: {
             show: true,
@@ -124,6 +137,11 @@
     }
         },
         radiusAxis: {
+            axisLable:{
+                textStyle:{
+                    color:'#fff'
+                }
+            }
         },
         polar: {
         },
