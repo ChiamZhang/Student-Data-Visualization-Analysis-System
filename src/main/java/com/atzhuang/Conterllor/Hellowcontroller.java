@@ -41,6 +41,12 @@ public class Hellowcontroller {
         return "/User/noAuth";
     }
 
+    @RequestMapping({"/getHelp","/"})
+    public String getHelp(){
+        return "help";
+    }
+
+
     @RequestMapping("/updata")
     public String updata(){
         return "/User/updata";

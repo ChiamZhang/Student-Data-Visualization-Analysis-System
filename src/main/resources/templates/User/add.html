@@ -10,11 +10,11 @@
 <form action="/user/add" method="post">
     <table>
         <tr>
-            <td>学号：</td>
+            <td>学工号：</td>
             <td><input type="text" name="xuehao"></td>
         </tr>
         <tr>
-            <td>用户名：</td>
+            <td>姓名：</td>
             <td><input type="text" name="name"></td>
         </tr>
         <tr>
@@ -22,8 +22,16 @@
             <td><input type="password" name="password"></td>
         </tr>
         <tr>
-            <td>权力：</td>
-            <td><input type="text" name="power"></td>
+            <td>证明材料：</td>
+            <td>
+                <input type="file" id="chooseImage" name="file">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <!-- 保存用户自定义的背景图片 -->
+                <img id="cropedBigImg" value='custom' alt="lorem ipsum dolor sit" data-address='' title="自定义背景" style="height: 200px;width: 100px;" />
+            </td>
         </tr>
         <tr>
             <td><input type="submit" value="登录"></td>
@@ -31,6 +39,7 @@
         </tr>
     </table>
 </form>
-
+<script src="/js/jquery.js"></script>
+<script src="/js/one.js"></script>
 </body>
 </html>

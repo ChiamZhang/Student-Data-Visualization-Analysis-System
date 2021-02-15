@@ -16,11 +16,11 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
     @RequestMapping("/add")
-    public String Addperson(String xuehao, String name, String password, String power, Model model){
+    public String Addperson(String xuehao, String name, String password, Model model){
         ByteSource salt=ByteSource.Util.bytes(xuehao);
         System.out.println("添加用户时的腌制："+salt);
         Object result=new SimpleHash("MD5",password,salt,1024);
-        userRepository.save(new person(name,result.toString(),xuehao,power));
+        userRepository.save(new person(name,result.toString(),xuehao,"add"));
         model.addAttribute("mes","添加用户成功！");
         return "/User/add";
     }
