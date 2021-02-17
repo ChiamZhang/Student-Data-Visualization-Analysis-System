@@ -29,19 +29,20 @@
         }
 
         body {
-            background-color: #3c5b9a;
+            /*背景*/
+            background-color: whitesmoke;
             padding: 4rem;
             font-family: tahoma;
         }
 
         .main {
             width: 100%;
-            background-color: #e9eaef;
-            box-shadow: 0 0 20px #143477;
+            background-color: #292d3e;
+            box-shadow: 0 0 20px #292d3e;
         }
 
         .top {
-            background-color: #3c5b9a;
+            background-color: #222533;
         }
 
         .header {
@@ -68,13 +69,14 @@
         }
 
         .login button {
+            font-size: 20px;
             outline: none;
             float: left;
-            background-color: #4277b2;
-            border: 1px solid #29487d;
+            background-color: #292d3e;
+            border: 1px solid #292d3e;
             color: white;
-            height: 30px;
-            width: 100px;
+            height: 50px;
+            width: 140px;
             cursor: pointer;
         }
 
@@ -142,7 +144,7 @@
             left: 0;
             top: 0;
             transition: 0.2s ease all;
-            color: #757575;
+            color: #4a2f5b;
         }
 
         /* .signup .label {
@@ -174,16 +176,14 @@
             </h1>
 
             <div class="login">
-                <form>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="password" required>
-                    <button type="submit">login</button>
-                </form>
+
+                    <button type="submit"><a href="/toLogin">去登陆</a> </button>
+
             </div>
         </div>
 
         <h2>请在下方输入相应信息</h2>
-        <h3>用户名、申请信息、验证照片</h3>
+        <h3>教师编号、申请信息、请提交教师证件照片</h3>
 
     </div>
 
@@ -192,21 +192,21 @@
         <form action="/user/add" method="post">
             <div class="field">
                 <input type="text" required>
-                <span class="label">School No</span>
+                <span class="label">教师编号</span>
             </div>
 
             <div class="field">
                 <input type="text" required>
-                <span class="label">Your Name</span>
+                <span class="label">您的姓名</span>
             </div>
 
             <div class="field">
                 <input type="text" required>
-                <span class="label">news</span>
+                <span class="label">学院信息</span>
             </div>
 
             <div class="field">
-                <input type="file" id="chooseImage" name="file" required>
+                <input type="file" id="chooseImage" name="file"  value="请提交教师证件" required>
                 <div class="field-img">
                     <img id="cropedBigImg" value='custom' alt="lorem ipsum dolor sit"
                          data-address='' title="自定义背景"
@@ -218,6 +218,7 @@
                 <!-- <button class="label">Sign Up</button> -->
                 <button class="label" style="color: white;">提交</button>
             </div>
+
         </form>
     </div>
 </div>
