@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>添加用户界面</title>
@@ -99,11 +100,13 @@
             width: 800px;
             height: 500px;
             margin: auto;
-            background-color: white;
+            background-color: #ececec;
             position: relative;
             /* top: -71px; */
             top: -120px;
             padding: 30px;
+
+            border-radius: 18px;
         }
 
         .signup h4 {
@@ -118,12 +121,14 @@
 
         .signup input {
             display: block;
+            height: 30px;
             width: 100%;
             border: none;
             outline: none;
             border-bottom: 1px solid #999;
             color: gray;
             font-size: 1rem;
+            opacity: 0.5;
         }
 
         .signup button {
@@ -156,8 +161,8 @@
             color: #757575;
         } */
 
-        .signup input:focus ~ .label,
-        .signup input:not(:focus):valid ~ .label {
+        .signup input:focus~.label,
+        .signup input:not(:focus):valid~.label {
             top: -17px;
             font-size: .8rem;
             opacity: 1;
@@ -165,6 +170,7 @@
     </style>
 
 </head>
+
 <body>
 <!--<h3>输入信息</h3>-->
 <!--<div th:text="${mes}" style="color: red"></div>-->
@@ -177,7 +183,7 @@
 
             <div class="login">
 
-                    <button type="submit"><a href="/toLogin">去登陆</a> </button>
+                <button type="submit"><a href="/toLogin" style="color: white;">去登陆</a> </button>
 
             </div>
         </div>
@@ -206,11 +212,10 @@
             </div>
 
             <div class="field">
-                <input type="file" id="chooseImage" name="file"  value="请提交教师证件" required>
+                <input type="file" id="chooseImage" name="file" value="请提交教师证件" required>
                 <div class="field-img">
-                    <img id="cropedBigImg" value='custom' alt="lorem ipsum dolor sit"
-                         data-address='' title="自定义背景"
-                         style="height: 90px;width: 150px;"/>
+                    <img id="cropedBigImg" value='custom' alt="lorem ipsum dolor sit" data-address='' title="自定义背景"
+                         style="height: 90px;width: 150px;" />
                 </div>
             </div>
 
@@ -225,4 +230,5 @@
 <script src="/js/jquery.js"></script>
 <script src="/js/one.js"></script>
 </body>
+
 </html>
