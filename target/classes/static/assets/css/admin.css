@@ -90,7 +90,7 @@
 }
 
 .layui-layout-admin .layui-footer{
-    background-color: #e8eaed;
+    /*background-color: #e8eaed;*/
 }
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 .layui-tank .layui-card::-webkit-scrollbar

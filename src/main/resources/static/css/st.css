@@ -9,7 +9,7 @@ body{
 
     background: url("/css/images/main.png") fixed no-repeat;
     /*background: #013954;*/
-    background-size: 100%;
+    background-size: cover;
 
 }
 #Echarts{

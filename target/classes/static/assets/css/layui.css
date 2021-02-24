@@ -72,7 +72,9 @@ pre {
 
 body {
 	line-height: 24px;
-	font: 14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif
+	font: 14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+	background-size: cover;
+	background: url("/css/images/main.png") fixed no-repeat;
 }
 
 hr {
@@ -822,6 +824,7 @@ a cite {
 	top: 0;
 	bottom: 0;
 	z-index: 998;
+	height: 93%;
 	width: auto;
 	overflow: hidden;
 	overflow-y: auto;
@@ -860,7 +863,7 @@ a cite {
 	height: 44px;
 	line-height: 44px;
 	padding: 0 15px;
-	background-color: #eee
+	/*background-color: #eee*/
 }
 
 .layui-layout-admin .layui-logo {

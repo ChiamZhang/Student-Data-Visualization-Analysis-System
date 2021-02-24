@@ -7,8 +7,8 @@ body{
     width:90%;
     height: 90%;
     /*background: #013954;*/
-    background-size: 100%;
-    background: url("/css/images/main.jpg") fixed no-repeat;
+    background-size: cover;
+    background: url("/css/images/main.png") fixed no-repeat;
 }
 #Echarts{
     width:1600px;height:800px;
