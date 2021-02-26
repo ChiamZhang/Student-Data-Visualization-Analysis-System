@@ -44,7 +44,11 @@ body{
     display: table-cell;
     vertical-align: middle;
 }
-
+#h2-title{
+    font-family: 幼圆;
+    font-weight: 900;
+    margin: 0 auto;
+}
 .login-form{
     width: 320px;
     padding: 40px 30px;
@@ -60,6 +64,7 @@ body{
     background: inherit;
     box-shadow: inset 0 0 0 200px
     rgba(255, 255, 255, 0.25);
+    font-family: Consolas;
 }
 
 .login-form::before {
@@ -159,6 +164,8 @@ body{
     border:none;
     cursor: pointer;
     transition: padding-right .4s ease;
+    font-family: 微软雅黑;
+    font-size: medium;
 }
 
 .login-button i{

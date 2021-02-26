@@ -32,18 +32,23 @@
         body {
             /*背景*/
             background-color: whitesmoke;
-            padding: 4rem;
+            padding: 2rem;
+            margin: 0 auto;
             font-family: tahoma;
         }
 
         .main {
-            width: 100%;
+            width: 75%;
+            height: 870px;
+            margin: 0 auto;
             background-color: #292d3e;
             box-shadow: 0 0 20px #292d3e;
+            border-radius: 20px  20px  20px  20px;
         }
 
         .top {
             background-color: #222533;
+            border-radius: 20px  20px 20px 20px;
         }
 
         .header {
@@ -64,9 +69,9 @@
             width: 150px;
             height: 30px;
             padding: 5px;
-            border: none;
             float: left;
             outline: none;
+            border-radius: 20px  0px  20px  20px;
         }
 
         .login button {
@@ -98,7 +103,7 @@
 
         .signup {
             width: 800px;
-            height: 500px;
+            height: 600px;
             margin: auto;
             background-color: #ececec;
             position: relative;
@@ -111,23 +116,29 @@
 
         .signup h4 {
             color: gray;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
         }
 
         .signup .field {
             margin-top: 30px;
             position: relative;
         }
+        #cropedBigImg
+        {
+            height: 100px;
+            width: 100px;
+        }
 
         .signup input {
             display: block;
-            height: 30px;
+            height: 40px;
             width: 100%;
             border: none;
             outline: none;
             border-bottom: 1px solid #999;
-            color: gray;
-            font-size: 1rem;
+            color: #2E2D3C;
+            font-size: large;
+            font-weight: bold;
             opacity: 0.5;
         }
 
@@ -150,6 +161,7 @@
             top: 0;
             transition: 0.2s ease all;
             color: #4a2f5b;
+            font-size: larger;
         }
 
         /* .signup .label {
@@ -161,6 +173,14 @@
             color: #757575;
         } */
 
+        #title{
+            font-family: 幼圆;
+            font-size: 60px;
+            color: white;
+            padding: 20px;
+            margin: 0px auto;
+            text-align: center;
+        }
         .signup input:focus~.label,
         .signup input:not(:focus):valid~.label {
             top: -17px;
@@ -178,7 +198,10 @@
     <div class="top">
         <div class="header">
             <h1 class="logo">
-                <a href=""><img src="/css/images/i2.png" alt=""></a>
+<!--                <a href=""><img src="/css/images/i2.png" alt=""></a>-->
+                <div id="title">
+                    欢迎申请及使用
+                </div>
             </h1>
 
             <div class="login">
@@ -186,6 +209,7 @@
                 <button type="submit"><a href="/toLogin" style="color: white;">去登陆</a> </button>
 
             </div>
+
         </div>
 
         <h2>请在下方输入相应信息</h2>
@@ -214,8 +238,7 @@
             <div class="field">
                 <input type="file" id="chooseImage" name="file" value="请提交教师证件" required>
                 <div class="field-img">
-                    <img id="cropedBigImg" value='custom' alt="lorem ipsum dolor sit" data-address='' title="自定义背景"
-                         style="height: 90px;width: 150px;" />
+                    <img id="cropedBigImg" value='custom' alt="暂未交教师证件" data-address='' title="自定义背景" width="90px" height="200px" />
                 </div>
             </div>
 
