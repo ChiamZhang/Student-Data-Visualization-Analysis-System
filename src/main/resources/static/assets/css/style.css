@@ -3,6 +3,9 @@
 	overflow-y: auto;
 }
 /*定义滑块 内阴影+圆角*/
+.layui-row{
+
+}
 .layui-tank .layui-card::-webkit-scrollbar-thumb
 {
     border-radius: 3px;    
@@ -50,6 +53,11 @@
 }
 .positionbox{
 	padding: 20px;
+ 	border-radius:10px 10px 10px 10px;
+	border:1px solid #a19b97;
+	width:75%;
+	height:650px;
+	margin:0 auto;
 }
 .fuldy{
 	padding-left: 110px;
